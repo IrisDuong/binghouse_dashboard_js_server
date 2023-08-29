@@ -1,9 +1,9 @@
 const userRegMngtDao = require("../dao/userRegMngtDao");
 const Q = require("q");
 
-exports.getListUsers = () =>{
+exports.getListUsers = (param) =>{
     var defer = Q.defer();
-    userRegMngtDao.getListUsers()
+    userRegMngtDao.getListUsers(param)
     .then(result=>{
         defer.resolve(result);
     })

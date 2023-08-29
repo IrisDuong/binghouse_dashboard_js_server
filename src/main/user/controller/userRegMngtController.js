@@ -5,10 +5,12 @@ router.get("/",(req,res)=>{
     res.json({message:"trang quan ly nguoi dung"})
 })
 
-router.get("/users",(req,res)=>{
-    userRegMngtService.getListUsers()
+router.post("/users",(req,res)=>{
+    var param = req.body;
+    console.log("param get users",param);
+    userRegMngtService.getListUsers(param)
     .then(result=>{
-        console.log("result in controller",result);
+        // console.log("result in controller",result);
         res.json({listUser:result});
     })
     .catch(error=> {
