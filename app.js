@@ -37,7 +37,10 @@ app.post("/login",passport.authenticate("local",{
     successRedirect : "/",
     failureRedirect : "/loginfalure",
     // failureFlash : true
-}));
+}),(req,res)=>{
+
+    console.log("show session USER after login",req.session);
+});
 passport.use("local",new LocalStrategy({passReqToCallBack:true},(username, password, done,req)=>{
     console.log("start login");
     console.log("username",username);
@@ -57,7 +60,6 @@ passport.use("local",new LocalStrategy({passReqToCallBack:true},(username, passw
 app.get("/",(req,res,next)=>{
     // console.log("req",req);
     if(req.isAuthenticated()){
-        console.log("sesson USER after login",req.session);
         console.log("trang chu bing house");
         res.send("trang chu")
     }else{
