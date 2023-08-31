@@ -37,4 +37,19 @@ exports.getListUsers = (param)=>{
     })
     .catch(error=> defer.reject(error));
     return defer.promise;
+};
+
+exports.getLoginUserInfo = param =>{
+    var defer = Q.defer();
+    User.findOne({
+        where: {
+            user_name : param.user_name,
+            password : param.password
+        }
+    })
+    .then(result =>{
+        defer.resolve(result);
+    })
+    .catch(error=> defer.reject(error));
+    return defer.promise;
 }

@@ -8,5 +8,15 @@ exports.getListUsers = (param) =>{
         defer.resolve(result);
     })
     .catch(error=> defer.reject(error))
-    return defer.promise
+    return defer.promise;
+}
+
+exports.getLoginUserInfo = param =>{
+    var defer = Q.defer();
+    userRegMngtDao.getLoginUserInfo(param)
+    .then(result=>{
+        defer.resolve(result);
+    })
+    .catch(error=> defer.reject(error))
+    return defer.promise;
 }
