@@ -43,7 +43,7 @@ exports.getLoginUserInfo = param =>{
     var defer = Q.defer();
     User.findOne({
         where: {
-            user_name : param.user_name,
+            user_name : param.userName,
             password : param.password
         }
     })
