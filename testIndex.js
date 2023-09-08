@@ -2,11 +2,20 @@ var express = require("express");
 var cors = require("cors");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
-
+var {graphqlHTTP} = require("express-graphql");
+var {GraphQLSchema} = require("graphql");
+var {queryType} = require("./src/main/test/graphql/query");
 var {connection,roleEntity,ROLES} = require("./src/config/database");
 
 require("dotenv").config();
 var app = express();
+
+/**GrapHQL */
+var schema = new GraphQLSchema({query : queryType});
+app.use("/graphql",graphqlHTTP({
+    schema : schema,
+    graphiql : true
+}))
 var corsOpt = {
     origin : "http://localhost:3000"
 }
@@ -25,20 +34,6 @@ connection.sync({alter:true}).then(()=>{
     console.log("---- testIndex--------- All tables were created successfully");
     roleEntity.findAll()
     .then(roles=>{
-        // if(!roles){
-        //     roleEntity.create({
-        //         id:1,
-        //         name : "user"
-        //     });
-        //     roleEntity.create({
-        //         id:2,
-        //         name : "moderator"
-        //     });
-        //     roleEntity.create({
-        //         id:3,
-        //         name : "admin"
-        //     });
-        // }
         for(let i = 0; i <  ROLES.length; i++){
             var duplicatedRole = roles.filter(k=> k.name == ROLES[i]);
             if(duplicatedRole.length > 0) break;
