@@ -26,6 +26,16 @@ app.use(cors(corsOpt));
 
 app.get("/",(req,res)=>{
     res.send("Test JWT with Nodejs and Passportjs")
+});
+function md1(req,res,next){
+    console.log("--------- name from req BEFORE IS  = "+req.body.name);
+    req.body.name = "bang";
+    next()
+}
+app.post("/testmiddleware",md1,(req,res)=>{
+    
+    console.log("--------- name from req AFTER  IS  = "+req.body.name);
+    res.end()
 })
 require("./src/main/test/routes/auth.routes")(app);
 require("./src/main/test/routes/user.routes")(app);

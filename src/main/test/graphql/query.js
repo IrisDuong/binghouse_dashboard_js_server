@@ -10,10 +10,10 @@ var queryType = new GraphQLObjectType({
                 return "GrapHQL xin chào";
             }
         },
-        movie : {
-            type : movieType,
-            args : 
-        }
+        // movie : {
+        //     type : movieType,
+        //     args : 
+        // }
     }
 });
 
