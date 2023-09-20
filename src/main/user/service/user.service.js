@@ -13,15 +13,6 @@ const createUser = async param =>{
     return await userDao.createUser(_param);
 }
 
-const getLoginUserInfo = async param =>{
-    var _param = {
-        user_name : param.userName,
-        password : param.password
-    }
-
-    return await userDao.getLoginUserInfo(_param);
-}
-
 const getUserByUsername = async userName =>{
     return await userDao.getUserByUsername(userName);
 }
@@ -39,7 +30,6 @@ const getRolesByIds = async ids =>{
 }
 module.exports = {
     createUser : createUser,
-    getLoginUserInfo : getLoginUserInfo,
     getUserByUsername : getUserByUsername,
     getUserByEmail : getUserByEmail,
     getRolesByNames : getRolesByNames,

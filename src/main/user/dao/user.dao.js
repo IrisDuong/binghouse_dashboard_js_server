@@ -5,15 +5,6 @@ const createUser = async param =>{
     return await UserEntity.create(param);
 }
 
-const getLoginUserInfo = async param =>{
-    return await UserEntity.findOne({
-        where : {
-            user_name : param.user_name,
-            password : param.password
-        }
-    })
-}
-
 const getUserByUsername = async user_name =>{
     return await UserEntity.findOne({
         where : {
@@ -51,7 +42,6 @@ const getRolesByIds = async ids =>{
 }
 module.exports = {
     createUser : createUser,
-    getLoginUserInfo : getLoginUserInfo,
     getUserByUsername : getUserByUsername,
     getUserByEmail : getUserByEmail,
     getRolesByNames : getRolesByNames,
