@@ -1,44 +1,56 @@
 var {Sequelize,DataTypes} = require("sequelize");
 require("dotenv").config();
 
-var connection = new Sequelize(
+var sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USERNAME,
     process.env.DB_PASSWORD,
     {
-        host: process.env.DB_HOST,
         dialect : process.env.DB_DIALECT,
-        pool:{
-            max : 5,
-            min : 0,
-            idle : 10000,
-            acquire : 30000
-        },
+        host : process.env.DB_HOST,
+        timezone : "+07:00",
+        dialectOptions : {
+            useUTC :false,
+            dateStrings : true,
+            typeCast : true,
+            timezone : "+07:00"
+        }
+        
     }
 )
 
-var db = {};
-db.Sequelize = Sequelize
-db.connection = connection;
+sequelize.authenticate()
+.then(()=>console.log("=============================CONNECT TO MYSQL DATABASE successfully ============================="))
+.catch(error=>console.log("=============================CONNECT TO MYSQL DATABASE failed ============================="));
 
-db.userEntity = require("../main/user/entity/userEntity")(connection,DataTypes);
-db.roleEntity = require("../main/user/entity/roleEntity")(connection,DataTypes);
+var database = {}
+database.sequelize = sequelize;
+database.Sequelize = Sequelize;
+database.ROLES = ["ADMIN","MODERATOR","EMPLOYEE","CUSTOMER","ETC"];
 
-db.roleEntity.belongsToMany(db.userEntity,{
-    through : "user_roles"
-});
+// Initial model
+database.RoleEntity = require("../main/user/entity/role.entity")(sequelize,DataTypes);
+database.UserEntity = require("../main/user/entity/user.entity")(sequelize,DataTypes);
+database.RefreshTokenEntity = require("../main/auth/entity/refresh.token.entity")(sequelize,DataTypes);
 
-db.userEntity.belongsToMany(db.roleEntity,{
-    through : "user_roles"
-});
+//Association
+database.RoleEntity.belongsToMany(database.UserEntity,{through : "tb_mba_user_role"});
+database.UserEntity.belongsToMany(database.RoleEntity,{through : "tb_mba_user_role"});
+database.RefreshTokenEntity.belongsTo(database.UserEntity,{foreignKey : "user_id",targetKey : "id"})
+database.UserEntity.hasOne(database.RefreshTokenEntity,{foreignKey:"user_id",targetKey : "id"});
 
-db.ROLES = ["user", "admin", "moderator"];
-
-db.connection.authenticate()
-.then(()=>{
-    console.log("Connected to database successfully");
+//Connection
+database.sequelize.sync({alter:true})
+.then(async ()=>{
+    console.log("=============================All tables successfully =============================")
+    //Init list ROLES
+    var _listRoles = await database.RoleEntity.findAll();
+    for(let i = 0; i < database.ROLES.length; i++){
+        var _existedRoles = [];
+        if(_listRoles) _existedRoles = _listRoles.filter(e=> e.name === database.ROLES[i]);
+        if(_existedRoles.length === 0) database.RoleEntity.create({name :  database.ROLES[i]});
+    }
 })
-.catch(error=>{
-    console.log("Connected to database failed");
-})
-module.exports = db;
+.catch(error=>console.log("=============================Failed to create tables  ============================="));
+
+module.exports = database;

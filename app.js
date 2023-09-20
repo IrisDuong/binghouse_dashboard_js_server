@@ -1,42 +1,14 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
-var session = require("express-session");
-var passport = require("passport");
+const express = require("express");
+const app = express();
 require("dotenv").config();
-var sequelize = require("./src/config/databaseconn");
-var userRole = require("./src/main/user/entity/userRoleEntity")
-/** load config */
-var appPath = process.env.APP_PATH;
-var PORT = process.env.PORT || 3001;
-var HOST = process.env.HOST;
-var SECRET_KEY = process.env.SECRET_KEY;
-
-/** Middleware */
-app.use(session({
-    secret  : SECRET_KEY,
-    resave : true,
-    saveUninitialized  :true,
-    cookie : {
-        _expires : 180000
-    }
-}))
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}))
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-app.use(require(__dirname+"/src/router"));
-
-/**Init database */
-sequelize.sync({force:true}).then(()=>{
-    // console.log("All tables were created successfully");
-}).catch((error) => {
-    // console.error('Unable to create table : ', error);
- });
-
-/** Start server */
-app.listen(PORT,HOST,()=>{
-    // console.log(`server is running at port ${PORT}`);
+require(__dirname + "/src/config/database.js");
+app.use(express.json());
+app.use(express.urlencoded({extended : true}))
+require(__dirname + "/src/routes")(app)
+//START SERVER
+const PORT = process.env.PORT;
+app.listen(PORT,()=>{
+    console.log(`=============================Server of Bing House dashboard is running at port ${PORT}=============================`);
 })
+
+
