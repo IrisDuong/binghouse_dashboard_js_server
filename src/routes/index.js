@@ -7,6 +7,7 @@ module.exports = app =>{
 
     //module routes
     router.use("/userMngt", require(__dirname + "/user.routes.js"));
-
+    router.use("/auth", require(__dirname + "/auth.routes.js"));
+    
     app.use("/bh_dashboard/api", router);
 }

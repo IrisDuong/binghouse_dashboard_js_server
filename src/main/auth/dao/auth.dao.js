@@ -1,5 +1,5 @@
 
-var {RefreshTokenEntity} = require("../../../config/database");
+var {RefreshTokenEntity,UserEntity} = require("../../../config/database");
 
 const createRefreshToken = async  param =>{
     return await RefreshTokenEntity.create(param);
@@ -12,4 +12,8 @@ const getLoginUserInfo = async param =>{
             password : param.password
         }
     })
+}
+module.exports = {
+    createRefreshToken : createRefreshToken,
+    getLoginUserInfo  : getLoginUserInfo
 }

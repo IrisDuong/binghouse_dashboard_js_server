@@ -15,16 +15,32 @@ const createRefreshToken = async user =>{
         exp_date : expiredDate,
         user_id :  user.id
     }
-    return await authDao.createRefreshToken(param);
+    var refreshToken = await authDao.createRefreshToken(param);
+    return refreshToken;
 }
 
 const getLoginUserInfo = async param =>{
-    return await authDao.getLoginUserInfo(
-        { 
-            user_name : param.userName,
-            password : param.password
+    try {
+        var _user = await authDao.getLoginUserInfo(
+            { 
+                user_name : param.userName,
+                password : param.password
+            }
+        )
+        var user = {
+            id : _user.id,
+            userName : _user.user_name,
+            email : _user.email,
+            fullName : _user.full_name,
+            address : _user.address,
+            dob : _user.dob,
+            avatarPath : _user.avatar_path,
+
         }
-    )
+        return user;
+    } catch (error) {
+        return error;
+    }
 }
 
 const createJwtToken = user =>{
@@ -35,7 +51,7 @@ const createJwtToken = user =>{
         secretKey,
         {
             algorithm : "HS256",
-            expiresIn  :JWT_EXPIRED_TIME,
+            expiresIn  :jwtExpTime,
             allowInsecureKeySizes : true
         }
     )
