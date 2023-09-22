@@ -18,11 +18,11 @@ const createUser = async (req,res)=>{
         statusCode = 201;
         data.message = "User Registration successfully !"
         data.user = _user;
-    } catch (error) {
+    } catch (error) {z
         statusCode = 500;
         data.message = "Failed ! Error in User Registration !"
     }
-    res.status(statusCode).json({data:data})
+    res.status(statusCode).json(data);
 }
 
 module.exports = {
