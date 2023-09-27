@@ -13,19 +13,10 @@ const login = async (req,res)=>{
         user.accessToken = authService.createJwtToken(user);
         var refreshToken = await authService.createRefreshToken(user);
         user.refreshToken = refreshToken.token;
-        // data.user = {
-        //     userName: user.userName,
-        //     email: user.email,
-        //     fullName: user.email,
-        //     address: user.address,
-        //     dob: user.dob,
-        //     avatarPath: user.avatarPath
-        // };
-        console.log("user login",user);
-        return res.status(200).send({message:message,user:user});
+        return res.status(200).json({message:message,user:user});
     }else{
         data.message = "Login Failed !";
-        res.status(500).send({message:message})
+        res.status(500).json({message:message})
     }
    
 }
