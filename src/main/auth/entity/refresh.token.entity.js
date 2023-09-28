@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) =>{
         },
         token : DataTypes.STRING,
         exp_date : DataTypes.DATE,
-        user_id :  DataTypes.STRING
+        user_id :  DataTypes.INTEGER
     },
     {
         underscored : true

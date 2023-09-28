@@ -34,6 +34,7 @@ exports.verifyRoles = async  (req,res,next)=>{
     if((typeof req.body.roles === "undefined" ) || (req.body.roles.length === 0)) return res.status(400).json({data:{message : "Roles are required !"}});
     var param = [];
     req.body.roles.map(e=> param.push(e.id))
+    console.log("param",param);
     var _roles = await userService.getRolesByIds(param);
     var errRoles = "";
     for(let i = 0; i <  req.body.roles.length;i++){

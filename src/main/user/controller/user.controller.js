@@ -18,6 +18,7 @@ const createUser = async (req,res)=>{
         statusCode = 201;
         data.message = "User Registration successfully !"
         data.user = _user;
+        console.log("data create",data);
     } catch (error) {z
         statusCode = 500;
         data.message = "Failed ! Error in User Registration !"
