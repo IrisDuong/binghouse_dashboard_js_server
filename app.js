@@ -5,6 +5,7 @@ require("dotenv").config();
 require(__dirname + "/src/config/database.js");
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
+app.use(express.static(__dirname+"/src/public/build/"))
 app.use(cors({
     origin : "http://localhost:3000"
 }))
