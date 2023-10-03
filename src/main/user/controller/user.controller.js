@@ -1,5 +1,4 @@
 var userService = require("../service/user.service");
-
 const createUser = async (req,res)=>{
     var statusCode = 201;
     var data = {};
@@ -10,7 +9,8 @@ const createUser = async (req,res)=>{
     //     sexGbn : req.body.sexGbn,
     // }
     console.log("param signup from client",req.body);
-    console.log("param Avatar signup from client",req.files);
+    console.log("param Avatar signup from client");
+    console.log(req.body.file);
     // var param = {
     //     userName : req.body.userName,
     //     password : req.body.password,
