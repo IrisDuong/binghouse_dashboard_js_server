@@ -28,17 +28,26 @@ database.sequelize = sequelize;
 database.Sequelize = Sequelize;
 database.ROLES = ["ADMIN","MODERATOR","EMPLOYEE","CUSTOMER","ETC"];
 
-// Initial model
+/**
+ * Initial model
+ */
+
+//member and auth
 database.RoleEntity = require("../main/user/entity/role.entity")(sequelize,DataTypes);
 database.UserEntity = require("../main/user/entity/user.entity")(sequelize,DataTypes);
 database.RefreshTokenEntity = require("../main/auth/entity/refresh.token.entity")(sequelize,DataTypes);
+
+//common code
+database.SyaAttachFileEntity = require("../main/common/entity/sya.file.entity")(sequelize,DataTypes);
+// database.SybCommonCodeEntity = require("../main/common/entity/syb.commoncode.entity")(sequelize,DataTypes);
+// database.SybGeneralCodeEntity = require("../main/common/entity/syb.generalcode.entity")(sequelize,DataTypes);
 
 //Association
 database.RoleEntity.belongsToMany(database.UserEntity,{through : "tb_mba_user_role"});
 database.UserEntity.belongsToMany(database.RoleEntity,{through : "tb_mba_user_role"});
 database.RefreshTokenEntity.belongsTo(database.UserEntity,{foreignKey : "user_id",targetKey : "id"})
 database.UserEntity.hasOne(database.RefreshTokenEntity,{foreignKey:"user_id",targetKey : "id"});
-
+database.UserEntity.belongsTo(database.SyaAttachFileEntity,{foreignKey:"attach_file_code"});
 //Connection
 database.sequelize.sync({alter:true})
 .then(async ()=>{
