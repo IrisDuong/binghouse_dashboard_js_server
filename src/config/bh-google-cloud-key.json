@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "focus-electron-400404",
+  "private_key_id": "cfa697b8730194991095df8a73b661264c274959",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCxY0LM/zvRYaHB\nN/Wc0vg/9/+QA5fQE2Bs8S0xiedEefL6ZQyme/1lCfG0Z+0+4AtwLhxCrT6KC7ll\niTCZnmQEHq3zEBIPwuxgNOdD2c3nLob6nVdw09w11g/fIkWDD/Uwc3ji0XwqUGSR\nmwNmb2Flp0evFVUpw19mNRKlNLMaOl/faPDNUl4bueOgjWUq0yttI49UL5t8HD48\nbIS8L9SCFcnNVbBFR5d+jFKoUe3VWj3K5DEZ75ekHlwY+A4Oer9J6PiqY63ha7XR\n2y+5bSo+SJ7d/AxaKyfekuF0qZS0qqKZSzVE4Ikcn3fv4hn5OxOZI12UKqPxmdUg\nJaFql75JAgMBAAECggEABIovCzqMAB2Qy3Zga5FNp6tz565j3AAm81rPxokKOWsq\nkAR2iKs7LrMMs8qGHJoUyNvxPraa12MZ7VKPwxq14hIb7xDN+YfKT2MDOS4RkjVT\nYIYW1w0hAWK3WMVShJprsr/9y8ZDOH0CueQ+98fpdPXNRJqV6aH1ptK8Zax92fGy\nAkn92u3joJ2tMKwawl7bfF8nnfiw3Is/RudHO736R01njjqi5YuCvXc+0Tc0ce+b\nF7vQ1mVPsvsZlloWVH6CC4hy9dnernJEONVJYq6iNk2ny5RfjpzNn0PlWyf3mByu\nAkf+POhQCxN2IL3W8lcgS87zvKKm72RKUJdaQSD6QQKBgQDzISVLF3iz42SIqNKD\ngdYfqfMxVbxHdKQIWBxn4f/gwzXxqzNGc6UTN0gWXPRJ/TowEZW0BVuNebZ7CUfn\n4PnpbPWedBeznryDVKWDc3KXHpvA2KeIGFQDc1wd38jILSOVI9w0HAkLFbmGdOjU\njlOEVlG3ywB0fiD0ucf3PO9IIQKBgQC6xzFsj+wf5cpDEN5+OZadTJLHD5zUxov3\nIzn/ntHj59PsLxQpTgFBxeoGkwXGxnNPMFWc/HCdaOaNY4g1WiJjnNi4JhFJPKAP\nosst+eOyO1wcS+VrMJOHdzsYb7OLOsAn+/ozbauoF/39WsYI6QEuRi1VaY78u5gO\n2xpXCRsRKQKBgHtvs5hpRT3HUA5V7/MWYxjWVwMQLTP2EyWtXlabliaN1YBp0/GL\n2x5jbbT04o4CA53N/7xTEAVG6w+SSbB/N0J8sEMPW8005S6kNhgD8ASrZJZHKN9e\nwqCx2+3K5QxEZpFckHrgVPMMx5FtH5xy2hIRJRHz/bonIyI8hDqQ9EchAoGBAJhu\nKiLMTks18NzM7pebDhUvwfXdAwQPSXkW8aVxCyBxOV3eihivhY0VJUnaQPOZT8/H\nxYcJ6io8yzOGkEniVoBvJ9sZji/z3zkDhcfu0WnK0gBx3DifezcqEjt+Jcwx1VKM\nbQP9tALKGcnjhA0Pg5wtP6AeNsiBnLY7EAMJ9mIJAoGBAM3GsUb7dZsyKTIDJQ/h\n8RNebDCp6iJQdAqws0/YoMRjjdWx/7VBnEVWLPqoxaBCbnGhsgyRoWLL7rNUgNLj\nOCRd6/zIXjYqlIENG76y+zVwEEFI5CeJAsD4lTYABjwQZSKjJRh8Vff9DuFjoIMr\nixH8D77ke2im0mXCXJNk5TW9\n-----END PRIVATE KEY-----\n",
+  "client_email": "manhtt09@focus-electron-400404.iam.gserviceaccount.com",
+  "client_id": "118069768112786825411",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/manhtt09%40focus-electron-400404.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
