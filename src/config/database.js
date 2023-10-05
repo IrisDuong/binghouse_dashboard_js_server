@@ -38,16 +38,19 @@ database.UserEntity = require("../main/user/entity/user.entity")(sequelize,DataT
 database.RefreshTokenEntity = require("../main/auth/entity/refresh.token.entity")(sequelize,DataTypes);
 
 //common code
-database.SyaAttachFileEntity = require("../main/common/entity/sya.file.entity")(sequelize,DataTypes);
-// database.SybCommonCodeEntity = require("../main/common/entity/syb.commoncode.entity")(sequelize,DataTypes);
+database.SyaAttachFileEntity = require("../main/basicInfo/entity/sya.file.entity")(sequelize,DataTypes);
+database.SycLocaleCodeEntity =  require("../main/basicInfo/entity/syc.localecode.entity")(sequelize,DataTypes);
+database.SybCommonCodeEntity = require("../main/basicInfo/entity/syb.commoncode.entity")(sequelize,DataTypes);
 // database.SybGeneralCodeEntity = require("../main/common/entity/syb.generalcode.entity")(sequelize,DataTypes);
 
 //Association
 database.RoleEntity.belongsToMany(database.UserEntity,{through : "tb_mba_user_role"});
 database.UserEntity.belongsToMany(database.RoleEntity,{through : "tb_mba_user_role"});
-database.RefreshTokenEntity.belongsTo(database.UserEntity,{foreignKey : "user_id",targetKey : "id"})
 database.UserEntity.hasOne(database.RefreshTokenEntity,{foreignKey:"user_id",targetKey : "id"});
+database.RefreshTokenEntity.belongsTo(database.UserEntity,{foreignKey : "user_id",targetKey : "id"})
 database.UserEntity.belongsTo(database.SyaAttachFileEntity,{foreignKey:"attach_file_code"});
+
+database.SybCommonCodeEntity.belongsTo(database.SycLocaleCodeEntity,{foreignKey : "n_locale_code",targetKey:"locale_code"})
 //Connection
 database.sequelize.sync({alter:true})
 .then(async ()=>{
