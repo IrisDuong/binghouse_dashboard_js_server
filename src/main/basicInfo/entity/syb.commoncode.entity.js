@@ -4,13 +4,14 @@ module.exports = (sequelize, DataTypes) =>{
             type: DataTypes.CHAR(4),
             primaryKey: true
         },
-        common_code : {
+        detail_code : {
             type: DataTypes.CHAR(8),
             primaryKey: true
         },
         n_locale_code : DataTypes.INTEGER,
         code_type:  DataTypes.CHAR(2),
         use_yn : DataTypes.CHAR(1),
+        work_code : DataTypes.CHAR(3)
     }
     ,{underscored:true})
 }
