@@ -1,9 +1,8 @@
-var {SycLocaleCodeEntity,SybCommonCodeEntity, Sequelize} = require("../../../config/database");
+var {SycLocaleCodeEntity,SybCommonCodeEntity, Sequelize, SybGeneralCodeEntity} = require("../../../config/database");
 const {Op} = Sequelize;
 
 const getMaxLocaleCode = async () =>{
     var maxLocaleCode = await SycLocaleCodeEntity.max("locale_code")
-    console.log("maxLocaleCode from DB",maxLocaleCode);
     if(maxLocaleCode){
         return maxLocaleCode+1;
     }else{
@@ -22,7 +21,7 @@ const createLocaleCode = async param =>{
 const createCommonCode = async param =>{
     await SybCommonCodeEntity.create({
         system_code : param.system_code,
-        detail_code : param.detail_code,
+        common_code : param.common_code,
         n_locale_code : param.n_locale_code,
         code_type:  param.code_type,
         use_yn :  param.use_yn,
@@ -30,7 +29,6 @@ const createCommonCode = async param =>{
     });
 }
 const getCommonCodeInfo = async param =>{
-    console.log("getCommonCodeInfo param dao ",param);
     return await SybCommonCodeEntity.findAll({
         where : {
             system_code : param.system_code,
@@ -54,10 +52,25 @@ const getListCommonCodes = async param =>{
     return await SybCommonCodeEntity.findAll({
         where : {
             system_code : param.system_code,
-            work_code : {
-                [Op.substring]:param.work_code
-            }
+            work_code : param.work_code
         }
+    })
+}
+const getListGeneralCodes = async param =>{
+    return await SybGeneralCodeEntity.findAll({
+        where : {
+            system_code : param.system_code,
+            common_code  : param.common_code
+        },
+        include : {
+            model : SycLocaleCodeEntity,
+            where : {
+                lang_code : "EN"
+            }
+        },
+        order : [
+            ["order_seq","ASC"]
+        ]
     })
 }
 module.exports = {
@@ -65,5 +78,6 @@ module.exports = {
     createLocaleCode : createLocaleCode,
     createCommonCode  : createCommonCode,
     getCommonCodeInfo : getCommonCodeInfo,
-    getListCommonCodes : getListCommonCodes
+    getListCommonCodes : getListCommonCodes,
+    getListGeneralCodes  : getListGeneralCodes
 }

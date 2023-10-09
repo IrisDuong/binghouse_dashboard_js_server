@@ -13,10 +13,9 @@ const createCommonCode = async param =>{
             await generalCommonCodeDao.createLocaleCode(codeName)
         });
     }
-
     var commonCode = { 
         system_code : param.systemCode,
-        detail_code : param.detailCode,
+        common_code : param.commonCode,
         n_locale_code : maxLocaleCode,
         code_type : param.codeType,
         use_yn : param.useYn,
@@ -29,7 +28,6 @@ const createCommonCode = async param =>{
     }
 }
 const getCommonCodeInfo = async param =>{
-    console.log("getCommonCodeInfo param ",param);
     return await generalCommonCodeDao.getCommonCodeInfo({
         system_code : param.systemCode,
         common_code : param.commonCode
@@ -54,24 +52,46 @@ const getListCommonCodes = async param =>{
                     )
                 })
             }
-           var commonCode =  {
+           var _commonCode =  {
             systemCode : e.system_code,
-            detailCode : e.detail_code,
+            commonCode : e.common_code,
             codeType : e.code_type,
             useYn : e.use_yn,
             codeNames : codeNames,
             workCode : e.work_code
            }
-           console.log("commonCode",commonCode);
-           return commonCode;
+           return _commonCode;
         });
         return listCommonCodes
     }else{
         return [];
     }
 }
+
+const getListGeneralCodes = async param =>{
+    var _listGeneralCodes =  await generalCommonCodeDao.getListGeneralCodes({
+        system_code : param.systemCode,
+        common_code : param.commonCode
+    });
+
+    var result = []
+    for(let i = 0; i < _listGeneralCodes.length;i++){
+        var locale = await _listGeneralCodes[i].getTb_syc_locale_code();
+        var codeName = locale.code_name;
+        result.push({
+            systemCode : _listGeneralCodes[i].system_code,
+            commonCode : _listGeneralCodes[i].common_code,
+            generalCode : _listGeneralCodes[i].general_code,
+            useYn : _listGeneralCodes[i].use_yn,
+            codeName : codeName,
+            orderSeq : _listGeneralCodes[i].order_seq
+        })
+    }
+    return result;
+}
 module.exports = {
     createCommonCode : createCommonCode,
     getCommonCodeInfo  :getCommonCodeInfo,
-    getListCommonCodes  : getListCommonCodes
+    getListCommonCodes  : getListCommonCodes,
+    getListGeneralCodes : getListGeneralCodes
 }

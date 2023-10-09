@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) =>{
             type: DataTypes.CHAR(4),
             primaryKey: true
         },
-        detail_code : {
+        common_code : {
             type: DataTypes.CHAR(8),
             primaryKey: true
         },

@@ -29,8 +29,21 @@ const getListCommonCodes = async (req,res)=>{
         return res.status(500).json({message : error});
     }
 }
+
+const getListGeneralCodes = async (req,res)=>{
+    try {
+        var listGeneralCodes = await generalCommonCodeService.getListGeneralCodes({
+            systemCode : req.body.systemCode,
+            commonCode :  req.body.commonCode
+        })
+        return res.status(200).json({message : "Get Generals Code successfully",data:listGeneralCodes})
+    } catch (error) {
+        return res.status(500).json({message : error});
+    }
+}
 module.exports = {
     createCommonCode : createCommonCode,
     getCommonCodeInfo : getCommonCodeInfo,
-    getListCommonCodes  : getListCommonCodes
+    getListCommonCodes  : getListCommonCodes,
+    getListGeneralCodes : getListGeneralCodes
 }

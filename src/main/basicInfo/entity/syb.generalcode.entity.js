@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) =>{
             type: DataTypes.CHAR(8),
             primaryKey: true
         },
-        detail_code : {
+        general_code : {
             type: DataTypes.CHAR(20),
             primaryKey: true
         },
