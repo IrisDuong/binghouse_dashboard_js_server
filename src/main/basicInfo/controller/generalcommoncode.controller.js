@@ -1,4 +1,6 @@
 var generalCommonCodeService = require("../service/generalcommoncode.service");
+var url = require("url");
+
 const createCommonCode  = async (req,res)=>{
     try {
         await generalCommonCodeService.createCommonCode(req.body)
@@ -41,9 +43,24 @@ const getListGeneralCodes = async (req,res)=>{
         return res.status(500).json({message : error});
     }
 }
+const getCommonCodeDetail  = async (req,res)=>{
+    var parsedParams = url.parse(req.url,true)
+    console.log("************************************* getCommonCodeDetail by params ************************************ ");
+    console.log(parsedParams.query.systemCode);
+    try {
+        var commonCode = await generalCommonCodeService.getCommonCodeInfo({
+            systemCode : parsedParams.query.systemCode,
+            commonCode : parsedParams.query.commonCode
+        });
+        res.status(200).json({message : "Get Common Code successfully",data:commonCode})
+    } catch (error) {
+        return res.status(500).json({message : error});
+    }
+}
 module.exports = {
     createCommonCode : createCommonCode,
     getCommonCodeInfo : getCommonCodeInfo,
     getListCommonCodes  : getListCommonCodes,
-    getListGeneralCodes : getListGeneralCodes
+    getListGeneralCodes : getListGeneralCodes,
+    getCommonCodeDetail : getCommonCodeDetail
 }
