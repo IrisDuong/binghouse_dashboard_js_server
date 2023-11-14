@@ -1,16 +1,10 @@
 var userService = require("../service/user.service");
-
+var {Storage} = require("@google-cloud/storage");
+var {format} = require("util");
+var processFile = require("../../../config/google-cloud.upload");
+const { error } = require("console");
 const createUser = async (req,res)=>{
-    var param = {
-        userName : req.body.userName,
-        password : req.body.password,
-        email : req.body.email,
-        fullName : req.body.fullName,
-        dob : req.body.dob,
-        address : req.body.address,
-        avatarPath : req.body.avatarPath
-    }
-    var statusCode = 500;
+    var statusCode = 201;
     var data = {};
     try {
         var _user = await userService.createUser(param);
@@ -18,7 +12,6 @@ const createUser = async (req,res)=>{
         statusCode = 201;
         data.message = "User Registration successfully !"
         data.user = _user;
-        console.log("data create",data);
     } catch (error) {z
         statusCode = 500;
         data.message = "Failed ! Error in User Registration !"
