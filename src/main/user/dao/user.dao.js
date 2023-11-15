@@ -32,6 +32,7 @@ const getRolesByNames = async roleNames =>{
 }
 
 const getRolesByIds = async ids =>{
+    console.log("ids",ids);
     return await RoleEntity.findAll({
         where : {
             id : {
