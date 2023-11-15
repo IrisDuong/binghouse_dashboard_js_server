@@ -1,5 +1,6 @@
 var generalCommonCodeService = require("../service/generalcommoncode.service");
 var url = require("url");
+var fs = require("fs");
 
 const createCommonCode  = async (req,res)=>{
     try {
@@ -15,6 +16,7 @@ const getCommonCodeInfo  = async (req,res)=>{
             systemCode : req.body.systemCode,
             commonCode : req.body.commonCode
         });
+        console.log("getCommonCodeInfo");
         res.status(200).json({message : "Get Common Code successfully",data:commonCode})
     } catch (error) {
         return res.status(500).json({message : error});
@@ -57,10 +59,27 @@ const getCommonCodeDetail  = async (req,res)=>{
         return res.status(500).json({message : error});
     }
 }
+const importCommonCode = (req,res,next)=>{
+    console.log("importCommonCode from excel");
+    fs.readFile("/Import__Book_Rsult.xlsx",(err,data)=>{
+        try {
+            throw new Error("broken")
+        } catch (error) {
+            next(error)
+        }
+    })
+    // try {
+    //     const data = await fs.promises.readFile("/Import__Book_esult.xlsx","binary");
+    //     res.send(Buffer.from(data))
+    // } catch (error) {
+    //     res.status(500).json(error)
+    // }
+}
 module.exports = {
     createCommonCode : createCommonCode,
     getCommonCodeInfo : getCommonCodeInfo,
     getListCommonCodes  : getListCommonCodes,
     getListGeneralCodes : getListGeneralCodes,
-    getCommonCodeDetail : getCommonCodeDetail
+    getCommonCodeDetail : getCommonCodeDetail,
+    importCommonCode : importCommonCode
 }

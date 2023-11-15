@@ -6,6 +6,10 @@ router.post("/createCommonCode", generalcommoncodeController.createCommonCode);
 router.post("/getCommonCodeInfo",generalcommoncodeController.getCommonCodeInfo);
 router.post("/getListCommonCodes",generalcommoncodeController.getListCommonCodes);
 router.post("/getListGeneralCodes",generalcommoncodeController.getListGeneralCodes)
+router.get("/importCommonCode",[generalcommoncodeController.importCommonCode,(req,res)=>{
+    console.log("loi import common code");
+    res.send("co loi trong khi nhap tu file")
+}])
 router.get("/test",(req,res)=>{
     res.json({data :"test basicInfo"})
 });
